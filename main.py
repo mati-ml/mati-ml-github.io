@@ -17,8 +17,8 @@ x = int(x)
 print(x)
 
 
-app = Flask(__name__)    
-app.static_folder = 'static'
+aplicacion = Flask(__name__)    
+aplicacion.static_folder = 'static'
 
 @app.route('/')
 def inicio():
@@ -37,7 +37,7 @@ def inicio():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    aplicacion.run(debug=True)
 
 
 
