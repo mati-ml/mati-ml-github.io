@@ -8,7 +8,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 scope = ['https://www.googleapis.com/auth/spreadsheets',
          "https://www.googleapis.com/auth/drive"]
 
-Credentials = ServiceAccountCredentials.from_json_keyfile_name(r"C:\Users\diego\OneDrive\Desktop\aaaa\claves.json", scope)
+Credentials = ServiceAccountCredentials.from_json_keyfile_name(r"\claves.json", scope)
 cliente = gspread.authorize(Credentials)
 
 sheet = cliente.open("Estacionamientos Database").sheet1
