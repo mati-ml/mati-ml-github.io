@@ -1,0 +1,27 @@
+.bgcolor{
+    background-color: springgreen;
+}
+
+.posicion{
+    text-align: justify;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 65%;
+}
+
+.mt{
+    margin-top: ;
+}
+
+.p-3 {
+    padding: $spacer !important;
+  }
+
+.abs-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
