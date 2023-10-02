@@ -3,12 +3,12 @@ import flask
 from flask import Flask, request, render_template
 import time
 from pymongo import MongoClient
-
+import ssl
 # Configuración de MongoDB
 mongo_uri = "mongodb+srv://pagina:appuai@cluster0.sufar8c.mongodb.net/?retryWrites=true&w=majority"  # Reemplaza con tu URI de MongoDB
-client = MongoClient(mongo_uri)#,ssl=True,
-        #ssl_cert_reqs=ssl.CERT_REQUIRED,
-        #ssl_ca_certs="/cacert.pem")
+client = MongoClient(mongo_uri,ssl=True,
+        ssl_cert_reqs=ssl.CERT_REQUIRED,
+        ssl_ca_certs="cacert.pem")
 db = client['sensores']
 collection = db['valores']
 
@@ -49,4 +49,4 @@ def inicio():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
