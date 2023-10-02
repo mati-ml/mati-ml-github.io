@@ -20,8 +20,8 @@
         <div class="card-body">
           <h5 class="card-title ">Sector A</h5>
           <p class="card-text">Disponibles</p>
-          {% if x == 1 %}
-          <button type="button" style="color:green" class="btn btn-success"><p style="color:white ;">1</p></button>
+          {% if x > 0 %}
+          <button type="button" style="color:green" class="btn btn-success"><p style="color:white ;">{{x}}</p></button>
           {% endif %}
 
           {% if x== 0 %}
