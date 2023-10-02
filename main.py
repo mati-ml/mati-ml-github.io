@@ -1,6 +1,6 @@
 import pandas as pd
 import flask
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,app
 import time
 from pymongo import MongoClient
 import ssl
