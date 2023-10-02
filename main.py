@@ -1,20 +1,11 @@
 import pandas as pd
 import flask
 from flask import Flask, request, render_template
-import gspread
 import time
-from oauth2client.service_account import ServiceAccountCredentials
 
-scope = ['https://www.googleapis.com/auth/spreadsheets',
-         "https://www.googleapis.com/auth/drive"]
 
-Credentials = ServiceAccountCredentials.from_json_keyfile_name(r"\claves.json", scope)
-cliente = gspread.authorize(Credentials)
+df = pd.read_json('valores.json')
 
-sheet = cliente.open("Estacionamientos Database").sheet1
-x = sheet.acell("A1").value
-x = int(x)
-print(x)
 
 
 app = Flask(__name__)    
@@ -23,7 +14,9 @@ app.static_folder = 'static'
 @app.route('/')
 def inicio():
     while True:
-        x = sheet.acell("A1").value
+        df = pd.read_json('valores.json')
+        fila = df[df['nombre'] == 'A001']
+        x = fila['valor'].values[0]
         x = int(x)
         print(x)
         
