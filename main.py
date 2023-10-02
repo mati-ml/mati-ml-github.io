@@ -2,9 +2,24 @@ import pandas as pd
 import flask
 from flask import Flask, request, render_template
 import time
+from pymongo import MongoClient
+import ssl
+# Configuración de MongoDB
+mongo_uri = "mongodb+srv://pagina:appuai@cluster0.sufar8c.mongodb.net/?retryWrites=true&w=majority"  # Reemplaza con tu URI de MongoDB
+client = MongoClient(mongo_uri,ssl=True,
+        ssl_cert_reqs=ssl.CERT_REQUIRED,
+        ssl_ca_certs="cacert.pem")
+db = client['sensores']
+collection = db['valores']
 
+# Buscar un documento con el nombre "A001"
+documento = collection.find_one({"nombre": "A001"})
 
-df = pd.read_json('valores.json')
+# Verificar si se encontró un documento
+if documento:
+    # Obtener el valor del campo deseado, por ejemplo, 'valor'
+    x= documento.get('valor')
+print(x)
 
 
 
@@ -14,25 +29,24 @@ app.static_folder = 'static'
 @app.route('/')
 def inicio():
     while True:
-        df = pd.read_json('valores.json')
-        fila = df[df['nombre'] == 'A001']
-        x = fila['valor'].values[0]
-        x = int(x)
-        print(x)
-        
-        if x==1:
-            print(0)
-        else:
-            print(1)    
+        mongo_uri = "mongodb+srv://pagina:appuai@cluster0.sufar8c.mongodb.net/?retryWrites=true&w=majority"  # Reemplaza con tu URI de MongoDB
+        client = MongoClient(mongo_uri,ssl=True,
+                ssl_cert_reqs=ssl.CERT_REQUIRED,
+                ssl_ca_certs="cacert.pem")
+        db = client['sensores']
+        collection = db['valores']
 
-        return render_template("/index.html", x=x)
+            # Buscar un documento con el nombre "A001"
+        documento = collection.find_one({"nombre": "A001"})
+
+            # Verificar si se encontró un documento
+        if documento:
+               # Obtener el valor del campo deseado, por ejemplo, 'valor'
+            x= documento.get('valor')
+            print(x)
+            return render_template("/index.html", x=x)
         time.sleep(3)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-   
