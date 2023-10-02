@@ -1,4 +1,4 @@
-import wgsi
+import app
 import flask
 from flask import Flask, request, render_template
 import time
