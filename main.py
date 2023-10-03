@@ -38,3 +38,6 @@ def inicio():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+#agregar el comando en la terminal: gunicorn app:app
