@@ -1,4 +1,3 @@
-
 import flask
 from flask import Flask, request, render_template
 import time
@@ -25,19 +24,33 @@ def inicio():
         db = client['sensores']
         collection = db['valores']
 
-        # Buscar un documento con el nombre "A001"
-        documento = collection.find_one({"nombre": "A001"})
+        # Lista de nombres que quieres buscar
+        nombres = ["A001", "A002"]
 
-        # Verificar si se encontró un documento
-        if documento:
-            # Obtener el valor del campo deseado, por ejemplo, 'valor'
-            x = documento.get('valor')
-            print(x)
-            return render_template("/index.html", x=x)
-        time.sleep(3)
+        valores = []  # Lista para almacenar los valores
+
+        for nombre in nombres:
+            # Buscar un documento con el nombre actual
+            documento = collection.find_one({"nombre": nombre})
+
+            # Verificar si se encontró un documento
+            if documento:
+                # Obtener el valor del campo deseado, por ejemplo, 'valor'
+                x = documento.get('valor')
+                valores.append(x)
+
+        total = sum(valores)  # Calcular la suma de los valores
+
+        print("Valores:", valores)
+        print("Suma:", total)
+
+        # Renderizar la plantilla con el valor total
+        # Nota: Esto supone que estás utilizando Flask u otro framework web que admite renderizar plantillas
+        return render_template("/index.html", x=total)
+
+
+
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-
-#agregar el comando en la terminal: gunicorn app:app
+    app.run(debug=True) 
